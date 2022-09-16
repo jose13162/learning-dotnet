@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Dotnet {
+namespace dotnet {
   class Program {
     static void Main() {
-      Exam exam = new Exam("John", "ASP.NET", 98);
-      exam.Score = 132;
+      Song holiday = new Song("Holiday", "Green Day", 200);
+      Song kashmir = new Song("Kashmir", "Led Zeppelin", 150);
 
-      Console.WriteLine(exam.Score);
+      Console.WriteLine(Song.songCount);
     }
   }
 }
