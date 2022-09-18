@@ -1,30 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace dotnet {
   class Program {
     static void Main() {
-      Knight knight = new Knight();
-      Game<Knight> game = new Game<Knight>(knight);
+      List<int> list = new List<int>();
+      int[] numbers = { 5, 6, 2, 4, 8, 1, 9, 3, 7, 10 };
 
-      game.warrior.Attack();
+      list.AddRange(numbers);
+      Console.WriteLine(list.TrueForAll(LessThanTen));
     }
-  }
 
-  public interface IWarrior {
-    void Attack();
-  }
-
-  public class Knight : IWarrior {
-    public void Attack() {
-      Console.WriteLine("Knight attacks");
-    }
-  }
-
-  public class Game<T> where T : IWarrior {
-    public T warrior;
-
-    public Game(T warrior) {
-      this.warrior = warrior;
+    static bool LessThanTen(int number) {
+      return number < 10;
     }
   }
 }
