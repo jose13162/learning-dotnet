@@ -1,28 +1,24 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace dotnet {
   class Program {
-    public static void Main() {
-      var source = new CancellationTokenSource();
-      var token = source.Token;
-      source.Cancel();
+    public static async Task Main() {
+      Database database = new Database();
+      Stopwatch stopwatch = new Stopwatch();
+      
+      stopwatch.Start();
 
-      Task task = Task.Run(() => {
-        if (token.IsCancellationRequested) {
-          token.ThrowIfCancellationRequested();
-        }
+      int number = await Task.Run(() => {
+        int data = database.Query();
 
-        Thread.Sleep(2000);
-      }, token);
+        return data;
+      });
+      
+      stopwatch.Stop();
 
-      try {
-        task.Wait();
-      } catch (Exception exception) {
-        Console.WriteLine(exception.Message);
-      }
-
-      Console.WriteLine(task.Status);
-      Console.WriteLine(task.IsCanceled);
+      Console.WriteLine(stopwatch.ElapsedMilliseconds);
+      Console.WriteLine(number);
     }
   }
 }
